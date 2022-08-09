@@ -1,13 +1,41 @@
+
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { subHeading } from "../utils/styles";
+import { IIdPropsOnly, IEditFunction, ITodosPropsOnly, todos } from "../utils/interface";
+import { subHeadingStyle } from "../utils/styles";
+import Task from "./Task";
 
-const ActiveTask: React.FC = () => {
+
+const ActiveTask = ({ todos, setTodos }: ITodosPropsOnly) => {
+  const handleOnEdit: IEditFunction = (todo: todos): void => {
+    console.log(todo)
+  }
+  const handleOnDelete: IIdPropsOnly = (id: number): void => {
+    console.log(id)
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
+  const handleOnDone: IIdPropsOnly = (id: number): void => {
+    setTodos(todos.filter(todo => {
+      if (todo.id === id) {
+        todo.isDone = !todo.isDone
+      }
+      return todo
+    }))
+  }
   return (
-    <Box width="50%">
-      <Typography variant="h5" sx={subHeading}>
+    <Box width="50%" p={2} >
+      <Typography variant="h5" sx={subHeadingStyle} >
         Active Tasks
       </Typography>
+
+      {todos.map(todo => {
+        if (!todo.isDone){
+        return <Task key={todo.id} todo={todo} handleOnEdit={handleOnEdit} handleOnDelete={handleOnDelete} handleOnDone={handleOnDone} />
+      }
+      return null
+      }
+      )
+      }
     </Box>
   );
 };
