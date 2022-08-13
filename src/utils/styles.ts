@@ -22,5 +22,7 @@ export const inputStyle = {
   border: "none",
   outlineWidth: "0", 
   fontSize:'24px',
-  height:32
+  height:32,
+  width:'75%'
+  
 };

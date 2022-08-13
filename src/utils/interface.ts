@@ -20,7 +20,6 @@ export interface IIdPropsOnly {
 
 export interface ITaskProps {
   todo: todos,
-  handleOnEdit ?: IEditFunction | null,
   handleOnDelete ?: IIdPropsOnly | null,
   handleOnDone ?: IIdPropsOnly | null,
   completed?: boolean

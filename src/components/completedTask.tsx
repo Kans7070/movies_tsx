@@ -10,7 +10,7 @@ const CompletedTask = ({ todos, setTodos }: ITodosPropsOnly) => {
     setTodos(todos.filter(todo => todo.id !== id))
   }
   return (
-    <Box width="50%" textAlign="center" p={2}>
+    <Box width="100%" textAlign="center" p={2}>
       <Typography variant="h5" sx={subHeadingStyle}>
         Completed Tasks
       </Typography>

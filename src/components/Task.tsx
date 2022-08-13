@@ -7,26 +7,34 @@ import DoneIcon from '@mui/icons-material/Done';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { iconStyle, inputStyle, taskContainerStyle } from '../utils/styles';
 
-const Task = ({ todo, handleOnEdit=null, handleOnDelete=null, handleOnDone=null,completed=false }: ITaskProps) => {
+const Task = ({ todo,  handleOnDelete=null, handleOnDone=null,completed=false }: ITaskProps) => {
     const [edit, setEdit] = useState<boolean>(false)
     const [editValue, setEditValue] = useState(todo.todo)
     const inputRef = useRef<HTMLInputElement>(null)
     const handleOnEditIconClick = () => {
         if (!edit) {
             setEdit(true)
-        } 
+        } else {
+            setEdit(false)
+        }
     }
     useEffect(() => {
-        inputRef.current?.focus()
+        if (edit){
+            inputRef.current && inputRef.current.focus()
+            
+        }else{
+            inputRef.current && inputRef.current.blur()
+
+        }
     }, [edit])
+  
+    
 
     const handleOnEnter= (e:React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === 'Enter'){
             todo.todo = editValue
-            if (handleOnEdit){
-            handleOnEdit(todo)
-        }
             setEdit(false)
+
         }
     }
     return (

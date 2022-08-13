@@ -7,9 +7,7 @@ import Task from "./Task";
 
 
 const ActiveTask = ({ todos, setTodos }: ITodosPropsOnly) => {
-  const handleOnEdit: IEditFunction = (todo: todos): void => {
-    console.log(todo)
-  }
+
   const handleOnDelete: IIdPropsOnly = (id: number): void => {
     console.log(id)
     setTodos(todos.filter(todo => todo.id !== id))
@@ -23,16 +21,16 @@ const ActiveTask = ({ todos, setTodos }: ITodosPropsOnly) => {
     }))
   }
   return (
-    <Box width="50%" p={2} >
+    <Box width="100%" p={2} >
       <Typography variant="h5" sx={subHeadingStyle} >
         Active Tasks
       </Typography>
 
       {todos.map(todo => {
-        if (!todo.isDone){
-        return <Task key={todo.id} todo={todo} handleOnEdit={handleOnEdit} handleOnDelete={handleOnDelete} handleOnDone={handleOnDone} />
-      }
-      return null
+        if (!todo.isDone) {
+          return <Task key={todo.id} todo={todo} handleOnDelete={handleOnDelete} handleOnDone={handleOnDone} />
+        }
+        return null
       }
       )
       }
